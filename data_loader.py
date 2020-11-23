@@ -187,4 +187,4 @@ class OmniglotTest(Dataset):
         img2 = img2.convert('L')
         img1 = self.transform(img1)
         img2 = self.transform(img2)
-        return img1, img2, index
+        return img1, img2
