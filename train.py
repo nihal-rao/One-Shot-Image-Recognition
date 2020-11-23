@@ -60,7 +60,7 @@ def main():
                     count+=1
         writer.add_scalar('Accuracy_validation', count/trials, i)
 
-        print('Epoch {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
+        print('Epoch {} | Train loss {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
 
     writer.flush()
 
