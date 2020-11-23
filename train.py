@@ -63,6 +63,20 @@ def main():
         print('Epoch {} | Train loss {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
 
     writer.flush()
+    
+    trials = 400
+    test_loader = get_test_loader(data_dir, way, trials)
+    test_count = 0
+    with torch.no_grad():
+        for ref_images,candidates  in test_loader:
+            ref_images = ref_images.cuda()
+            candidates = candidates.cuda()
+
+            preds = siamese_model(ref_images, candidates)
+
+            if torch.argmax(preds) == 0:
+                test_count+=1
+    print('Test Accuracy {}'.format(test_count/len(test_loader)))
 
 if __name__ == '__main__':
     main()
