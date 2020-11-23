@@ -78,5 +78,7 @@ def main():
                 test_count+=1
     print('Test Accuracy {}'.format(test_count/len(test_loader)))
 
+    torch.save(siamese_model.state_dict(), 'model.pth')
+
 if __name__ == '__main__':
     main()
