@@ -29,7 +29,7 @@ def main():
         siamese_model.train()
         #batch_count = 0
         avg_train_loss = 0.0
-        for img_1, img_2, labels in train_loader:
+        for it, (img_1, img_2, labels) in enumerate(train_loader):
             optimizer.zero_grad()
 
             img_1 = img_1.cuda()
@@ -38,14 +38,15 @@ def main():
             preds = siamese_model(img_1, img_2)
 
             loss = criterion(preds, labels)
+            
             avg_train_loss+=loss.item()
+            writer.add_scalar('Loss_train', loss.item(), len(train_loader)*i + it)    
             
             loss.backward()
             optimizer.step()
             #batch_count+=1
             #print(batch_count)
-        writer.add_scalar('Loss_train', avg_train_loss/len(train_loader), i)
-
+        
         siamese_model.eval()
         count = 0
         with torch.no_grad():
@@ -59,7 +60,7 @@ def main():
                     count+=1
         writer.add_scalar('Accuracy_validation', count/trials, i)
 
-        print('Epoch {} | Train loss {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
+        print('Epoch {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
 
     writer.flush()
 
