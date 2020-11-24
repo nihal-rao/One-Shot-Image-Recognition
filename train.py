@@ -24,6 +24,8 @@ def main():
     writer = SummaryWriter()
 
     siamese_model.cuda()
+
+    best_accuracy = 0.0
     
     for i in range(epochs):
         siamese_model.train()
@@ -58,12 +60,20 @@ def main():
 
                 if torch.argmax(preds) == 0:
                     count+=1
+        if count/len(val_loader) > best_accuracy:
+            best_accuracy = count/len(val_loader)
+            torch.save(siamese_model.state_dict(), 'best_model.pth')
+
         writer.add_scalar('Accuracy_validation', count/trials, i)
 
         print('Epoch {} | Train loss {} | Val accuracy {}'.format(i, avg_train_loss/len(train_loader), count/trials))
 
     writer.flush()
     
+    best_model = Siamese().cuda()
+    best_model.load_state_dict(torch.load('best_model.pth'))
+    best_model.eval()
+
     trials = 400
     test_loader = get_test_loader(data_dir, way, trials)
     test_count = 0
@@ -72,13 +82,12 @@ def main():
             ref_images = ref_images.cuda()
             candidates = candidates.cuda()
 
-            preds = siamese_model(ref_images, candidates)
+            preds = best_model(ref_images, candidates)
 
             if torch.argmax(preds) == 0:
                 test_count+=1
+                
     print('Test Accuracy {}'.format(test_count/len(test_loader)))
-
-    torch.save(siamese_model.state_dict(), 'model.pth')
 
 if __name__ == '__main__':
     main()
