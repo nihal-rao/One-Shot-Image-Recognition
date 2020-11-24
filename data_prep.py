@@ -39,7 +39,7 @@ def prepare_dataset(root_dir):
                 drawer_img = os.path.join(i,j,k)
                 shutil.copyfile(drawer_img, os.path.join(char_dir, k))
 
-    val_root = os.path.join(root_dir, 'val')
+    val_root = os.path.join(root_dir, 'valid')
     os.makedirs(val_root, exist_ok=True)
 
     for i in val_alpha:
