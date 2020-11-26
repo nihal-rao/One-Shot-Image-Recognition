@@ -1,12 +1,14 @@
 # siamese-nn
 
 An implementation of the paper [Siamese Neural Networks for One-shot Image Recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf).
+The model architecture is as below (taken from the paper):
 
+<p align="center">
+  <img src= "siamese-nn-architecture.png">
+</p>
 
-
-With a few differences from the paper:
-* Same learning rate for all parameters, instead of layer wise learning rate as in the paper.
-* No learning rate decay.
+With the only difference being same learning rate for all parameters, instead of layer wise learning rate as in the paper.
+With this, achieves 93% accuracy with 30k pairs.
 
 ## Additional features:
 * Training loss and validation accuracy are logged via TensorBoard.
