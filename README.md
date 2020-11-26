@@ -1,4 +1,4 @@
-# siamese-nn
+# One Shot Image Recognition
 
 An implementation of the paper [Siamese Neural Networks for One-shot Image Recognition](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf).
 The model architecture is as below (taken from the paper):
