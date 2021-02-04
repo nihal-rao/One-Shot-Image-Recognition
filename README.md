@@ -29,4 +29,4 @@ With this, achieves 93% accuracy with 30k pairs.
 ```
 python train.py <DATA_DIR>
 ```
-* Hyperparameters such as learning rate, number of pairs fpr training, augmentation etc. can be changed in `train.py` .
+* Hyperparameters such as learning rate, number of pairs for training, augmentation etc. can be changed in `train.py` .
