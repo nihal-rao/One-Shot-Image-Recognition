@@ -24,7 +24,7 @@ With this, achieves 93% accuracy with 30k pairs.
  ```
  python data_prep.py <DATA_DIR>
  ```
- where `DATA_DIR` is the directory containing both the zip files.
+ where `DATA_DIR` is the directory containing both the unzipped files.
  * Run train.py to train the model:
 ```
 python train.py <DATA_DIR>
